@@ -21,6 +21,10 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <time.h>
+# include <sys/resource.h>
+# include <sys/mman.h>
+# include <unistd.h>
+# include <pthread.h>
 
 # define T_BOOL int
 # define TRUE 1

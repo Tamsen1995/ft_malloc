@@ -1,7 +1,4 @@
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <sys/mman.h>
+#include "../includes/ft_malloc.h"
 
 
 // 1 t_block find_block (t_block *last , size_t size ){
@@ -30,7 +27,7 @@ int main(int ac, char **argv)
 
 	nb = atoi(argv[2]);
 	c = argv[1][0];
-	str = (char *)mmap(0, nb + 1, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
+	str = (char *)mmap(0, nb + 1, PROT, ANON, -1, 0);
 
 	i = 0;
 	ac = 0;
