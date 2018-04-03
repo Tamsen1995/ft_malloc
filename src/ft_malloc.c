@@ -1,42 +1,48 @@
 #include "../includes/ft_malloc.h"
 
-
-// 1 t_block find_block (t_block *last , size_t size ){
-// 2 t_block b=base;
-// 3 while (b && !(b->free && b->size >= size )) {
-// 4 *last = b;
-// 5 b = b->next;
-// 6 }
-// 7 return (b);
-// 8 }
-
-
 /*
 ** Finds a block of the size indicated by the user
 ** If this can't be done then the heap / linked list is to be extended
 */
-// t_block find_block (t_block *last , size_t size )
 
+// t_block find_block(t_block *last, size_t size)
+// {
+// 	t_block b = base; // this is to be a global variable
+// 	while (b && !(b->free && b->size >= size))
+// 	{
+// 		*last = b;
+// 		b = b->next;
+// 	}
+// 	return (b);
+// }
+
+void *ft_malloc(size_t size)
+{
+	void *ptr;
+
+	ptr = mmap(0, size + 1, PROT, ANON, -1, 0);
+
+	return (ptr);
+}
 
 int main(int ac, char **argv)
 {
+	char *str;
+	char c;
 	int i;
 	int nb;
-	char c;
-	char *str;
 
-	nb = atoi(argv[2]);
+	ac = 0; // TESTING
 	c = argv[1][0];
-	str = (char *)mmap(0, nb + 1, PROT, ANON, -1, 0);
-
+	nb = atoi(argv[2]);
+	str = (char *)ft_malloc((size_t)nb);
 	i = 0;
-	ac = 0;
 	while (i < nb)
 	{
 		str[i] = c;
 		i++;
 	}
 	str[i] = '\0';
-	printf("%s\n", str);
+	printf("%s\n", str); // TESTING
 	return (0);
 }

@@ -27,7 +27,6 @@ SRC = ft_atoi.c \
 	ft_putstr.c \
 	ft_putstr_fd.c \
 	ft_strcat.c \
-	ft_strchr.c \
 	ft_strclr.c \
 	ft_strcmp.c \
 	ft_strcpy.c \
@@ -47,7 +46,6 @@ SRC = ft_atoi.c \
 	ft_strnequ.c \
 	ft_strnew.c \
 	ft_strnstr.c \
-	ft_strrchr.c \
 	ft_strsplit.c \
 	ft_strstr.c \
 	ft_count_chars.c \
