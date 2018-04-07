@@ -22,6 +22,7 @@
 # include <sys/stat.h>
 # include <time.h>
 # include <sys/resource.h>
+# include <sys/types.h>
 # include <sys/mman.h>
 # include <unistd.h>
 # include <pthread.h>
