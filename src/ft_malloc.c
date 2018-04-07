@@ -40,9 +40,17 @@ void find_block(size_t size)
 	{
 		// iterating until a block of an appropiate
 		// size has been found
-		while (tmp_block && tmp_block->size < size)
+		while (tmp_block && (tmp_block->size < size + sizeof(t_block) || tmp_block->free == FALSE))
 			tmp_block = tmp_block->next;
 		tmp_mem_group = tmp_mem_group->next;
+
+		// TODO : Implement all the functions in the printf strings
+		if (tmp_block->size > size)
+			split_block(tmp_block);
+		else if (tmp_block->size == size)
+			printf("\nreturn the block\n");
+		else
+			printf("extend the heap");
 	}
 
 	// if a block of a bigger size has been found then split the memory
