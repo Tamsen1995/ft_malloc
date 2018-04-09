@@ -27,6 +27,39 @@ t_mem_group *new_mem_group(t_mem_group *current, size_t size)
 	return (mem_group);
 }
 
+void split_block(t_block *current, size_t size)
+{
+	t_block *new;
+
+	new = (void *)current->ptr + size;
+	new->ptr = (void *)new + sizeof(t_block);
+	new->free = TRUE;
+	new->size = current->size - size - sizeof(t_block);
+
+	if (current->next)
+		new->next = current->next;
+	current->next = new;
+
+
+	// TESTING
+	t_block *tmp;
+
+	tmp = current;
+	while (tmp)
+	{
+		
+		tmp = tmp->next;
+	}
+	// TESTING
+
+
+}
+
+/*
+** the size parameter implies the sought 
+** after size for the memory allocation
+*/
+
 void find_block(size_t size)
 {
 	t_block *tmp_block;
@@ -34,31 +67,23 @@ void find_block(size_t size)
 
 	tmp_block = glob_memory.sml->mem;
 	tmp_mem_group = glob_memory.sml;
-	// higher level iteration which will
-	// go through the mem_group (actual heap)
 	while (tmp_mem_group)
 	{
 		// iterating until a block of an appropiate
 		// size has been found
+		// and the block is not occupied
 		while (tmp_block && (tmp_block->size < size + sizeof(t_block) || tmp_block->free == FALSE))
 			tmp_block = tmp_block->next;
 		tmp_mem_group = tmp_mem_group->next;
-
 		// TODO : Implement all the functions in the printf strings
-		if (tmp_block->size > size)
-			split_block(tmp_block);
+		// if a block of a bigger size has been found then split the memory
+		if (tmp_block->size > size + sizeof(t_block))
+			split_block(tmp_block, size);
 		else if (tmp_block->size == size)
-			printf("\nreturn the block\n");
+			printf("\nreturn the block\n"); // if it is the same size then return
 		else
 			printf("extend the heap");
 	}
-
-	// if a block of a bigger size has been found then split the memory
-
-	// if it is the same size then return
-
-	printf("\n%lu\n", glob_memory.sml->size);								// TESTING
-	printf("\ntmp_block->size: %lu\nsize: %lu\n\n", tmp_block->size, size); // TESTING
 }
 
 void *ft_malloc(size_t size)
@@ -96,6 +121,6 @@ int main(void)
 {
 	char *str;
 
-	str = (char *)ft_malloc(10);
+	str = (char *)ft_malloc(53000);
 	return (0);
 }
