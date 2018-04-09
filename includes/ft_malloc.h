@@ -1,8 +1,10 @@
 #ifndef FT_MALLOC_H
 #define FT_MALLOC_H
 
-#define PROT PROT_READ | PROT_WRITE
-#define ANON MAP_PRIVATE | MAP_ANONYMOUS
+# define SML 512
+# define MED 4096
+# define PROT PROT_READ | PROT_WRITE
+# define ANON MAP_PRIVATE | MAP_ANONYMOUS
 //# define BLOCK_SIZE sizeof(struct s_block)
 
 #include "./libft.h"
