@@ -87,13 +87,17 @@ int main(void)
 
 	nbr = 5000;
 	i = 0;
-	str = (char *)ft_malloc(nbr);
 	while (i < nbr)
 	{
-		str[i] = 'i';
-		i++;
+		i = 0;
+		str = (char *)ft_malloc(nbr);
+		while (i < nbr)
+		{
+			str[i] = 'i';
+			i++;
+		}
+		str[i] = '\0';
 	}
-	str[i] = '\0';
 	ft_putstr(str);
 	return (0);
 }
