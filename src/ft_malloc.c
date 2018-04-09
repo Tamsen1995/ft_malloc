@@ -78,26 +78,3 @@ void *ft_malloc(size_t size)
 	else
 		return (NULL);
 }
-
-int main(void)
-{
-	char *str;
-	int i;
-	int nbr;
-
-	nbr = 5000;
-	i = 0;
-	while (i < nbr)
-	{
-		i = 0;
-		str = (char *)ft_malloc(nbr);
-		while (i < nbr)
-		{
-			str[i] = 'i';
-			i++;
-		}
-		str[i] = '\0';
-	}
-	ft_putstr(str);
-	return (0);
-}

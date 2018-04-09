@@ -1,9 +1,15 @@
+ifeq ($(HOSTTYPE),)
+	HOSTTYPE := $(shell uname -m)_$(shell uname -s)
+endif
+
 CC = gcc
 FLAGS = -g -Wall -Wextra -Werror -I includes
 LIBFT = libft/libft.a
 NAME = malloc
-SRC = src/ft_malloc.c \
+SRC = src/main.c \
+	src/ft_malloc.c \
 	src/malloc_find_block.c \
+	src/ft_realloc.c \
 
 OBJ = $(addsuffix .o, $(basename $(SRC)))
 
