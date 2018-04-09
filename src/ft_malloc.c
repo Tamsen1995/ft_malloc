@@ -59,51 +59,6 @@ void extend_heap(t_mem_group *mem_group, size_t size)
 		new_mem_group(mem_group, sz * 128);
 }
 
-/*
-** chooses the appropiate memory zone
-** for the sought after allocation size.
-*/
-
-t_mem_group *choose_mem_group(size_t size)
-{
-	if (size <= SML)
-		return (glob_memory.sml);
-	else if (size <= MED)
-		return (glob_memory.med);
-	return (NULL);
-}
-
-/*
-** the size parameter implies the sought 
-** after size for the memory allocation
-*/
-
-t_block *find_block(size_t size)
-{
-	t_block *tmp_block;
-	t_mem_group *tmp_group;
-
-	tmp_group = NULL;
-	if (size <= SML || size <= MED)
-		tmp_group = choose_mem_group(size);
-	// else
-	// 	return (large_size(size));
-	while (tmp_group)
-	{
-		tmp_block = tmp_group->mem;
-		while (tmp_block && (tmp_block->size < size + sizeof(t_block) || tmp_block->free == FALSE))
-			tmp_block = tmp_block->next;
-		if (tmp_block->size > size + sizeof(t_block))
-			return (split_block(tmp_block, size));
-		else if (tmp_block->size == size)
-			return (tmp_block);
-		else
-			extend_heap(tmp_group, size);
-		tmp_group = tmp_group->next;
-	}
-	return (NULL);
-}
-
 void *ft_malloc(size_t size)
 {
 	t_block *ret;
@@ -130,7 +85,7 @@ int main(void)
 	int i;
 	int nbr;
 
-	nbr = 4000;
+	nbr = 5000;
 	i = 0;
 	str = (char *)ft_malloc(nbr);
 	while (i < nbr)
