@@ -68,8 +68,9 @@ t_mem_group *choose_mem_group(size_t size)
 {
 	if (size <= SML)
 		return (glob_memory.sml);
-	else // if (size <= MED) just for testing purposes this is commented out
+	else if (size <= MED)
 		return (glob_memory.med);
+	return (NULL);
 }
 
 /*
@@ -82,10 +83,14 @@ t_block *find_block(size_t size)
 	t_block *tmp_block;
 	t_mem_group *tmp_group;
 
-	tmp_group = choose_mem_group(size);
-	tmp_block = tmp_group->mem;
+	tmp_group = NULL;
+	if (size <= SML || size <= MED)
+		tmp_group = choose_mem_group(size);
+	// else
+	// 	return (large_size(size));
 	while (tmp_group)
 	{
+		tmp_block = tmp_group->mem;
 		while (tmp_block && (tmp_block->size < size + sizeof(t_block) || tmp_block->free == FALSE))
 			tmp_block = tmp_block->next;
 		if (tmp_block->size > size + sizeof(t_block))
@@ -96,7 +101,7 @@ t_block *find_block(size_t size)
 			extend_heap(tmp_group, size);
 		tmp_group = tmp_group->next;
 	}
-	return (NULL); // NULL for now
+	return (NULL);
 }
 
 void *ft_malloc(size_t size)
@@ -113,7 +118,10 @@ void *ft_malloc(size_t size)
 		glob_memory.med = new_mem_group(NULL, sz);
 	}
 	ret = find_block(size);
-	return (ret->ptr);
+	if (ret)
+		return (ret->ptr);
+	else
+		return (NULL);
 }
 
 int main(void)
@@ -122,7 +130,7 @@ int main(void)
 	int i;
 	int nbr;
 
-	nbr = 10000;
+	nbr = 4000;
 	i = 0;
 	str = (char *)ft_malloc(nbr);
 	while (i < nbr)
