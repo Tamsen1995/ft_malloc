@@ -3,6 +3,7 @@ FLAGS = -g -Wall -Wextra -Werror -I includes
 LIBFT = libft/libft.a
 NAME = malloc
 SRC = src/ft_malloc.c \
+	src/malloc_find_block.c \
 
 OBJ = $(addsuffix .o, $(basename $(SRC)))
 
