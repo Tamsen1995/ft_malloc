@@ -23,11 +23,16 @@ t_mem_group *new_mem_group(t_mem_group *current, size_t size)
 	tmp_block->next = NULL;
 	tmp_block->size = mem_group->size - sizeof(t_block);
 	if (current)
-		printf("\nIf the current is present, then add the newly allocated mem_group to the next pointer of it.\n");
+		current->next = mem_group;
 	return (mem_group);
 }
 
-void split_block(t_block *current, size_t size)
+/*
+** splits a block to make a new one
+** then points the old one to new block and return the old one
+*/
+
+t_block *split_block(t_block *current, size_t size)
 {
 	t_block *new;
 
@@ -35,24 +40,36 @@ void split_block(t_block *current, size_t size)
 	new->ptr = (void *)new + sizeof(t_block);
 	new->free = TRUE;
 	new->size = current->size - size - sizeof(t_block);
-
+	current->size = current->size - new->size - sizeof(t_block);
+	current->free = FALSE;
 	if (current->next)
 		new->next = current->next;
 	current->next = new;
+	return (current);
+}
 
+void extend_heap(t_mem_group *mem_group, size_t size)
+{
+	size_t sz;
 
-	// TESTING
-	t_block *tmp;
+	sz = getpagesize() * 13;
+	if (size <= SML)
+		new_mem_group(mem_group, sz);
+	else if (size <= MED)
+		new_mem_group(mem_group, sz * 128);
+}
 
-	tmp = current;
-	while (tmp)
-	{
-		
-		tmp = tmp->next;
-	}
-	// TESTING
+/*
+** chooses the appropiate memory zone
+** for the sought after allocation size.
+*/
 
-
+t_mem_group *choose_mem_group(size_t size)
+{
+	if (size <= SML)
+		return (glob_memory.sml);
+	else // if (size <= MED) just for testing purposes this is commented out
+		return (glob_memory.med);
 }
 
 /*
@@ -60,40 +77,34 @@ void split_block(t_block *current, size_t size)
 ** after size for the memory allocation
 */
 
-void find_block(size_t size)
+t_block *find_block(size_t size)
 {
 	t_block *tmp_block;
-	t_mem_group *tmp_mem_group;
+	t_mem_group *tmp_group;
 
-	tmp_block = glob_memory.sml->mem;
-	tmp_mem_group = glob_memory.sml;
-	while (tmp_mem_group)
+	tmp_group = choose_mem_group(size);
+	tmp_block = tmp_group->mem;
+	while (tmp_group)
 	{
-		// iterating until a block of an appropiate
-		// size has been found
-		// and the block is not occupied
 		while (tmp_block && (tmp_block->size < size + sizeof(t_block) || tmp_block->free == FALSE))
 			tmp_block = tmp_block->next;
-		tmp_mem_group = tmp_mem_group->next;
-		// TODO : Implement all the functions in the printf strings
-		// if a block of a bigger size has been found then split the memory
 		if (tmp_block->size > size + sizeof(t_block))
-			split_block(tmp_block, size);
+			return (split_block(tmp_block, size));
 		else if (tmp_block->size == size)
-			printf("\nreturn the block\n"); // if it is the same size then return
+			return (tmp_block);
 		else
-			printf("extend the heap");
+			extend_heap(tmp_group, size);
+		tmp_group = tmp_group->next;
 	}
+	return (NULL); // NULL for now
 }
 
 void *ft_malloc(size_t size)
 {
-	void *ptr;
+	t_block *ret;
 	int sz;
 
-	ptr = NULL;
 	sz = 0;
-	// initialize memory zones
 	if (!glob_memory.init)
 	{
 		sz = getpagesize() * 13;
@@ -101,26 +112,25 @@ void *ft_malloc(size_t size)
 		sz = sz * 128;
 		glob_memory.med = new_mem_group(NULL, sz);
 	}
-
-	// block finding function
-	find_block(size);
-
-	// find a block of the appropiate size or bigger
-
-	// if the block is bigger then split the block.
-
-	return (ptr);
+	ret = find_block(size);
+	return (ret->ptr);
 }
-
-// struct t_block *allocate_block()
-// {
-
-// }
 
 int main(void)
 {
 	char *str;
+	int i;
+	int nbr;
 
-	str = (char *)ft_malloc(53000);
+	nbr = 10000;
+	i = 0;
+	str = (char *)ft_malloc(nbr);
+	while (i < nbr)
+	{
+		str[i] = 'i';
+		i++;
+	}
+	str[i] = '\0';
+	ft_putstr(str);
 	return (0);
 }
