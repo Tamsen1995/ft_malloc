@@ -25,6 +25,10 @@ void show_alloc_mem()
 		printf("%p - ", tmp_block->ptr);
 		printf("%p : ", tmp_block->next);
 		printf("%lu bytes\n", tmp_block->size);
+		if (tmp_block->free == TRUE)
+			ft_putendl("block status: FREE");
+		else
+			ft_putendl("block status: NOT FREE");
 		tmp_block = tmp_block->next;
 	}
 
@@ -37,6 +41,10 @@ void show_alloc_mem()
 		printf("%p - ", tmp_block->ptr);
 		printf("%p : ", tmp_block->next);
 		printf("%lu bytes\n", tmp_block->size);
+		if (tmp_block->free == TRUE)
+			ft_putendl("block status: FREE");
+		else
+			ft_putendl("block status: NOT FREE");
 		tmp_block = tmp_block->next;
 	}
 
@@ -48,6 +56,10 @@ void show_alloc_mem()
 		printf("%p - ", tmp_block->ptr);
 		printf("%p : ", tmp_block->next);
 		printf("%lu bytes\n", tmp_block->size);
+		if (tmp_block->free == TRUE)
+			ft_putendl("block status: FREE");
+		else
+			ft_putendl("block status: NOT FREE");
 		tmp_block = tmp_block->next;
 	}
 }
@@ -72,10 +84,8 @@ int main(void)
 		i++;
 	}
 	str[i] = '\0';
-
 	str = (char *)ft_realloc(str, nbr2 + 1);
-
 	show_alloc_mem(); // TESTING
-	ft_putstr(str);   // TESTING
+	//ft_putstr(str);   // TESTING
 	return (0);
 }
