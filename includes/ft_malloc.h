@@ -34,9 +34,12 @@ typedef struct s_memory
 
 extern t_memory glob_memory;
 
+void *ft_malloc(size_t size);
+void *ft_realloc(void *ptr, size_t size);
 t_block *find_block(size_t size);
 t_block *split_block(t_block *current, size_t size);
 void extend_heap(t_mem_group *mem_group, size_t size);
+t_block *return_block(t_block *tmp_block, size_t size);
 
 
 #endif
