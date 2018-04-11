@@ -41,6 +41,7 @@ int main(void)
 	i = 0;
 
 	i = 0;
+
 	str = (char *)ft_malloc(nbr);
 	while (i < nbr)
 	{
@@ -51,6 +52,7 @@ int main(void)
 
 	str = (char *)ft_realloc(str, nbr2);
 
-	//ft_putstr(str);
+	show_alloc_mem(); // TESTING
+	ft_putstr(str); // TESTING 
 	return (0);
 }

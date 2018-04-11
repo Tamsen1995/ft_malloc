@@ -54,10 +54,7 @@ void *ft_malloc(size_t size)
 	}
 	ret = find_block(size);
 	if (ret)
-	{
-		ft_putendl("\nsuccessfully returned a pointer\n"); // TESTING
 		return (ret->ptr);
-	}
 	else
 		return (NULL);
 }

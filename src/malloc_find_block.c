@@ -42,11 +42,13 @@ static void defragment(t_block *block_list)
 {
 	t_block *tmp_block;
 
+
 	tmp_block = block_list;
 	while (tmp_block && tmp_block->next)
 	{
 		if (tmp_block->free == TRUE && tmp_block->next->free == TRUE)
 		{
+			ft_putendl("\nInside of defragment()\n\n"); // TESTING
 			tmp_block->size = tmp_block->size + tmp_block->next->size + sizeof(t_block);
 			tmp_block->next = tmp_block->next->next;
 		}
@@ -68,6 +70,9 @@ t_block *split_block(t_block *current, size_t size)
 	new->free = TRUE;
 	new->size = current->size - size - sizeof(t_block);
 	current->size = current->size - new->size - sizeof(t_block);
+
+	printf("\n--->-> %lu\n\n", new->size); // TESTING
+
 	current->free = FALSE;
 	if (current->next)
 		new->next = current->next;
@@ -123,6 +128,5 @@ t_block *find_block(size_t size)
 			extend_heap(tmp_group, size);
 		tmp_group = tmp_group->next;
 	}
-
 	return (NULL);
 }
