@@ -7,8 +7,8 @@ int main(void)
 	int nbr;
 	int nbr2;
 
-	nbr = 5000;
-	nbr2 = 7000;
+	nbr = 200;
+	nbr2 = 100;
 	i = 0;
 
 	i = 0;

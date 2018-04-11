@@ -39,6 +39,21 @@ t_block *large_size(size_t size)
 }
 
 /*
+** returns either a block of exactly the size looked for
+** within the heap, or splits a block which is bigger
+** and then returns.
+*/
+
+t_block *return_block(t_block *tmp_block, size_t size)
+{
+	if (tmp_block->size > size + sizeof(t_block))
+		return (split_block(tmp_block, size));
+	else if (tmp_block->size == size)
+		return (tmp_block);
+	return (NULL);
+}
+
+/*
 ** the size parameter implies the sought 
 ** after size for the memory allocation
 */
@@ -58,10 +73,8 @@ t_block *find_block(size_t size)
 		tmp_block = tmp_group->mem;
 		while (tmp_block && (tmp_block->size < size + sizeof(t_block) || tmp_block->free == FALSE))
 			tmp_block = tmp_block->next;
-		if (tmp_block->size > size + sizeof(t_block))
-			return (split_block(tmp_block, size));
-		else if (tmp_block->size == size)
-			return (tmp_block);
+		if (tmp_block->size > size + sizeof(t_block) || tmp_block->size == size)
+			return (return_block(tmp_block, size));
 		else
 			extend_heap(tmp_group, size);
 		tmp_group = tmp_group->next;

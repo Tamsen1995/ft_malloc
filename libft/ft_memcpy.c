@@ -21,9 +21,11 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	srcptr = (char *)src;
 	if (dest == src || n == 0)
 		return (dest);
-	while (n--)
+	while (srcptr && n)
 	{
 		*destptr++ = *srcptr++;
+		n--;
 	}
+	*destptr = '\0';
 	return (dest);
 }
