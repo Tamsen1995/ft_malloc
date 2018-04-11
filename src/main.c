@@ -18,10 +18,13 @@ void show_alloc_mem()
 	t_block *tmp_block;
 
 	ft_putstr("TINY : ");
-	printf("%p", glob_memory.sml); // to be refactored
+	printf("%p\n", glob_memory.sml); // to be refactored
 	tmp_block = glob_memory.sml->mem;
 	while (tmp_block)
 	{
+		printf("%p - ", tmp_block->ptr);
+		printf("%p : ", tmp_block->next);
+		printf("%lu bytes\n", tmp_block->size);
 		tmp_block = tmp_block->next;
 	}
 }
@@ -34,7 +37,7 @@ int main(void)
 	int nbr2;
 
 	nbr = 200;
-	nbr2 = 10;
+	nbr2 = 180;
 	i = 0;
 
 	i = 0;
@@ -47,8 +50,6 @@ int main(void)
 	str[i] = '\0';
 
 	str = (char *)ft_realloc(str, nbr2);
-
-	show_alloc_mem();
 
 	//ft_putstr(str);
 	return (0);
