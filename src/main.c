@@ -8,7 +8,7 @@ int main(void)
 	int nbr2;
 
 	nbr = 200;
-	nbr2 = 100;
+	nbr2 = 10;
 	i = 0;
 
 	i = 0;

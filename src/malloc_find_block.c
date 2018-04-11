@@ -71,6 +71,7 @@ t_block *find_block(size_t size)
 	while (tmp_group)
 	{
 		tmp_block = tmp_group->mem;
+		// TODO : Degfragment the blocks here.
 		while (tmp_block && (tmp_block->size < size + sizeof(t_block) || tmp_block->free == FALSE))
 			tmp_block = tmp_block->next;
 		if (tmp_block->size > size + sizeof(t_block) || tmp_block->size == size)
