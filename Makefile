@@ -10,6 +10,7 @@ SRC = src/main.c \
 	src/ft_malloc.c \
 	src/malloc_find_block.c \
 	src/ft_realloc.c \
+	src/show_alloc_mem.c \
 
 OBJ = $(addsuffix .o, $(basename $(SRC)))
 

@@ -38,7 +38,7 @@ t_block *large_size(size_t size)
 	}
 }
 
-static void defragment(t_block *block_list)
+void defragment(t_block *block_list)
 {
 	t_block *tmp_block;
 
