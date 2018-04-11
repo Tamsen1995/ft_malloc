@@ -27,6 +27,29 @@ void show_alloc_mem()
 		printf("%lu bytes\n", tmp_block->size);
 		tmp_block = tmp_block->next;
 	}
+
+	ft_putstr("\nSMALL : ");
+	printf("%p\n", glob_memory.sml); // to be refactored
+
+	tmp_block = glob_memory.med->mem;
+	while (tmp_block)
+	{
+		printf("%p - ", tmp_block->ptr);
+		printf("%p : ", tmp_block->next);
+		printf("%lu bytes\n", tmp_block->size);
+		tmp_block = tmp_block->next;
+	}
+
+	ft_putstr("\nLARGE : ");
+	printf("%p\n", glob_memory.sml); // to be refactored
+	tmp_block = glob_memory.large;
+	while (tmp_block)
+	{
+		printf("%p - ", tmp_block->ptr);
+		printf("%p : ", tmp_block->next);
+		printf("%lu bytes\n", tmp_block->size);
+		tmp_block = tmp_block->next;
+	}
 }
 
 int main(void)
@@ -42,7 +65,7 @@ int main(void)
 
 	i = 0;
 
-	str = (char *)ft_malloc(nbr);
+	str = (char *)ft_malloc(nbr + 1);
 	while (i < nbr)
 	{
 		str[i] = 'i';
@@ -50,9 +73,9 @@ int main(void)
 	}
 	str[i] = '\0';
 
-	str = (char *)ft_realloc(str, nbr2);
+	str = (char *)ft_realloc(str, nbr2 + 1);
 
 	show_alloc_mem(); // TESTING
-	ft_putstr(str); // TESTING 
+	ft_putstr(str);   // TESTING
 	return (0);
 }
