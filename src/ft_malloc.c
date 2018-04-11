@@ -27,26 +27,6 @@ t_mem_group *new_mem_group(t_mem_group *current, size_t size)
 	return (mem_group);
 }
 
-/*
-** splits a block to make a new one
-** then points the old one to new block and return the old one
-*/
-
-t_block *split_block(t_block *current, size_t size)
-{
-	t_block *new;
-
-	new = (void *)current->ptr + size;
-	new->ptr = (void *)new + sizeof(t_block);
-	new->free = TRUE;
-	new->size = current->size - size - sizeof(t_block);
-	current->size = current->size - new->size - sizeof(t_block);
-	current->free = FALSE;
-	if (current->next)
-		new->next = current->next;
-	current->next = new;
-	return (current);
-}
 
 void extend_heap(t_mem_group *mem_group, size_t size)
 {
@@ -74,10 +54,7 @@ void *ft_malloc(size_t size)
 	}
 	ret = find_block(size);
 	if (ret)
-	{
-		ft_putendl("\nsuccessfully returned a pointer\n"); // TESTING
 		return (ret->ptr);
-	}
 	else
 		return (NULL);
 }
