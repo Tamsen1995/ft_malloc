@@ -5,7 +5,7 @@ void ft_free(void *ptr)
 	t_block *tmp_block;
 
 	tmp_block = NULL;
-	if (!ptr)
+	if (!check_pointer(ptr))
 	{
 		ft_putendl("Please provide a valid pointer.");
 		return;
@@ -27,7 +27,7 @@ int main()
 
 	addr = ft_malloc(16 );
 	ft_free(NULL);
-	ft_free((void *)addr + 5);
-	if (ft_realloc((void *)addr + 5, 10) == NULL)
+	ft_free((void *)addr);
+	if (ft_realloc((void *)addr, 10) == NULL)
 		print("Bonjours\n");
 }

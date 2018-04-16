@@ -1,15 +1,15 @@
 #ifndef FT_MALLOC_H
 #define FT_MALLOC_H
 
-# define SML 512
-# define MED 4096
-# define PROT PROT_READ | PROT_WRITE
-# define ANON MAP_PRIVATE | MAP_ANONYMOUS
+#define SML 512
+#define MED 4096
+#define PROT PROT_READ | PROT_WRITE
+#define ANON MAP_PRIVATE | MAP_ANONYMOUS
 //# define BLOCK_SIZE sizeof(struct s_block)
 
 #include "./libft.h"
 
-enum mem_zone 
+enum mem_zone
 {
 	Small,
 	Medium,
@@ -42,6 +42,7 @@ typedef struct s_memory
 extern t_memory glob_memory;
 
 void *ft_malloc(size_t size);
+t_mem_group *choose_zone(enum mem_zone zone);
 void *ft_realloc(void *ptr, size_t size);
 t_block *find_block(size_t size);
 t_block *split_block(t_block *current, size_t size);
@@ -51,6 +52,6 @@ T_BOOL check_pointer(void *ptr);
 void defragment(t_block *block_list);
 void ft_put_addr(void *addr);
 void show_alloc_mem();
-
+void ft_itoa_hex(uint64_t n, int is_upcase, char *buff);
 
 #endif

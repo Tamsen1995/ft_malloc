@@ -20,14 +20,10 @@ t_mem_group *choose_zone(enum mem_zone zone)
 	tmp_group = NULL;
 	if (zone == Small)
 	{
-		ft_putstr("TINY : ");
-		ft_put_addr((void *)glob_memory.sml);
 		tmp_group = glob_memory.sml;
 	}
 	else if (zone == Medium)
 	{
-		ft_putstr("SMALL : ");
-		ft_put_addr((void *)glob_memory.med);
 		tmp_group = glob_memory.med;
 	}
 	return (tmp_group);
