@@ -9,6 +9,13 @@
 
 #include "./libft.h"
 
+enum mem_zone 
+{
+	Small,
+	Medium,
+	Large,
+};
+
 typedef struct s_mem_group
 {
 	void *mem;
@@ -42,6 +49,7 @@ void extend_heap(t_mem_group *mem_group, size_t size);
 t_block *return_block(t_block *tmp_block, size_t size);
 T_BOOL check_pointer(void *ptr);
 void defragment(t_block *block_list);
+void ft_put_addr(void *addr);
 void show_alloc_mem();
 
 
