@@ -12,11 +12,14 @@ T_BOOL check_pointer(void *ptr)
 	tmp_block = NULL;
 	if (!ptr)
 		return (FALSE);
+
 	if (((void *)glob_memory.sml <= ptr) && (ptr <= (void *)(glob_memory.sml + glob_memory.sml->size)))
 		return (TRUE);
 	else if (((void *)glob_memory.med <= ptr) && (ptr <= (void *)(glob_memory.med + glob_memory.med->size)))
 		return (TRUE);
-	tmp_block = glob_memory.large;
+	if (glob_memory.large)
+		tmp_block = glob_memory.large;
+
 	while (tmp_block)
 	{
 		if (((void *)tmp_block <= ptr) && (ptr <= (void *)(tmp_block + tmp_block->size)))
@@ -33,13 +36,23 @@ void *ft_realloc(void *ptr, size_t size)
 
 	new_block = NULL;
 	old_block = NULL;
-	if (!check_pointer(ptr))
+
+	printf("\n%p\n", ptr); // TESTING
+
+
+	if (!ptr)
 		return (NULL);
+
 	old_block = (void *)ptr - sizeof(t_block);
+
 	new_block = find_block(size);
+
+	// Something is wrong with the memcpy
+	printf("\n%zu\n%zu\n", size, new_block->size); // TESTING
 	if (size < old_block->size)
 		new_block->ptr = ft_memcpy(new_block->ptr, old_block->ptr, size);
 	else
 		new_block->ptr = ft_memcpy(new_block->ptr, old_block->ptr, old_block->size);
+
 	return (new_block->ptr);
 }

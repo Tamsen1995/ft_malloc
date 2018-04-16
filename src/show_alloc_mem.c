@@ -13,43 +13,49 @@
 	Total : 52698 bytes
 */
 
-t_block *choose_zone(enum mem_zone zone)
+t_mem_group *choose_zone(enum mem_zone zone)
 {
-	t_block *tmp_block;
+	t_mem_group *tmp_group;
 
-	tmp_block = NULL;
+	tmp_group = NULL;
 	if (zone == Small)
 	{
 		ft_putstr("TINY : ");
 		ft_put_addr((void *)glob_memory.sml);
-		tmp_block = glob_memory.sml->mem;
+		tmp_group = glob_memory.sml;
 	}
 	else if (zone == Medium)
 	{
 		ft_putstr("SMALL : ");
 		ft_put_addr((void *)glob_memory.med);
-		tmp_block = glob_memory.med->mem;
+		tmp_group = glob_memory.med;
 	}
-	return (tmp_block);
+	return (tmp_group);
 }
 
 void show_alloc_zone(enum mem_zone zone)
 {
 	t_block *tmp_block;
+	t_mem_group *tmp_group;
 
-	tmp_block = choose_zone(zone);
-	while (tmp_block)
+	tmp_group = choose_zone(zone);
+	while (tmp_group)
 	{
-		ft_put_addr((void *)tmp_block->ptr);
-		ft_putstr(" - ");
-		ft_put_addr((void *)tmp_block->next);
-		ft_putstr(" : ");
-		printf("%lu bytes\n", tmp_block->size);
-		if (tmp_block->free == TRUE)
-			ft_putendl("block status: FREE\n");
-		else
-			ft_putendl("block status: NOT FREE\n");
-		tmp_block = tmp_block->next;
+		tmp_block = tmp_group->mem;
+		while (tmp_block)
+		{
+			ft_put_addr((void *)tmp_block->ptr);
+			ft_putstr(" - ");
+			ft_put_addr((void *)tmp_block->next);
+			ft_putstr(" : ");
+			printf("%lu bytes\n", tmp_block->size); // Refactor
+			if (tmp_block->free == TRUE)
+				ft_putendl("block status: FREE\n");
+			else
+				ft_putendl("block status: NOT FREE\n");
+			tmp_block = tmp_block->next;
+		}
+		tmp_group = tmp_group->next;
 	}
 }
 

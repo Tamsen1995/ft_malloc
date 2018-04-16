@@ -33,7 +33,7 @@ typedef struct s_block
 
 typedef struct s_memory
 {
-	char *init;
+	char init;
 	t_mem_group *sml;
 	t_mem_group *med;
 	t_block *large;
