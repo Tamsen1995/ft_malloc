@@ -51,6 +51,7 @@ void *ft_malloc(size_t size)
 		glob_memory.sml = new_mem_group(NULL, sz);
 		sz = sz * 128;
 		glob_memory.med = new_mem_group(NULL, sz);
+		glob_memory.init = TRUE;
 	}
 	ret = find_block(size);
 	if (ret)

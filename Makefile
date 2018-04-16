@@ -12,6 +12,7 @@ SRC = src/main.c \
 	src/ft_realloc.c \
 	src/ft_put_addr.c \
 	src/show_alloc_mem.c \
+	src/check_pointer.c \
 
 OBJ = $(addsuffix .o, $(basename $(SRC)))
 

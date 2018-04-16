@@ -15,31 +15,19 @@ void ft_free(void *ptr)
 	defragment(tmp_block);
 }
 
-int main(void)
+
+void print(char *s)
 {
-	char *str;
-	int i;
-	int nbr;
-	int nbr2;
+	write(1, s, strlen(s));
+}
 
-	nbr = 200;
-	nbr2 = 180;
-	i = 0;
+int main()
+{
+	char *addr;
 
-	i = 0;
-
-	str = (char *)ft_malloc(nbr + 1);
-	while (i < nbr)
-	{
-		str[i] = 'i';
-		i++;
-	}
-	str[i] = '\0';
-	str = (char *)ft_realloc(str, nbr2 + 1);
-
-	ft_free(str);
-
-	show_alloc_mem(); // TESTING
-	//ft_putstr(str);   // TESTING
-	return (0);
+	addr = ft_malloc(16 );
+	ft_free(NULL);
+	ft_free((void *)addr);
+	if (ft_realloc((void *)addr, 10) == NULL)
+		print("Bonjours\n");
 }
