@@ -26,7 +26,7 @@ T_BOOL check_pointer(void *ptr)
 	return (FALSE);
 }
 
-void *ft_realloc(void *ptr, size_t size)
+void *realloc(void *ptr, size_t size)
 {
 	t_block *old_block;
 	t_block *new_block;

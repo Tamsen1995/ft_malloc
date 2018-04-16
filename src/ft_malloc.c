@@ -39,12 +39,13 @@ void extend_heap(t_mem_group *mem_group, size_t size)
 		new_mem_group(mem_group, sz * 128);
 }
 
-void *ft_malloc(size_t size)
+void *malloc(size_t size)
 {
 	t_block *ret;
 	int sz;
 
 	sz = 0;
+	ft_putendl("My malloc!2"); // TESTING
 	if (!glob_memory.init)
 	{
 		sz = getpagesize() * 13;

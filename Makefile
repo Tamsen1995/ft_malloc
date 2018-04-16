@@ -3,11 +3,11 @@ ifeq ($(HOSTTYPE),)
 endif
 
 CC = gcc
-FLAGS = -g -Wall -Wextra -Werror -I includes
+FLAGS = -Wall -Wextra -Werror -I includes -shared -fPIC
 LIBFT = libft/libft.a
 NAME = malloc
-SRC = src/main.c \
-	src/ft_malloc.c \
+SRC = src/ft_malloc.c \
+	src/ft_free.c \
 	src/malloc_find_block.c \
 	src/ft_realloc.c \
 	src/ft_put_addr.c \
@@ -22,7 +22,8 @@ $(LIBFT):
 
 $(NAME):$(LIBFT) $(NAME) $(OBJ)
 	@echo "building binary file"
-	$(CC) $(FLAGS) $(SRC) -o $(NAME) -I -lft $(LIBFT)
+	$(CC) $(FLAGS) $(SRC) -o libft_malloc_$(HOSTTYPE).so -I -lft $(LIBFT)
+	ln -sf libft_malloc_$(HOSTTYPE).so libft_malloc.so
 
 %.o: %.c ft_ls.h
 		clang $(FLAG) -c $< -o $@
@@ -33,6 +34,8 @@ clean:
 
 fclean: clean
 	@echo "delete $(NAME)"
+	rm -rf libft_malloc.so
+	rm -rf libft_malloc_$(HOSTTYPE).so
 	@rm -f $(NAME)
 	@make fclean -C libft/
 
