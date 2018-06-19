@@ -15,7 +15,6 @@ void ft_free(void *ptr)
 	defragment(tmp_block);
 }
 
-
 void print(char *s)
 {
 	write(1, s, strlen(s));

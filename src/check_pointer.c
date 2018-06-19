@@ -1,5 +1,16 @@
 #include "../includes/ft_malloc.h"
 
+int		ft_strcmp(const char *s1, const char *s2)
+{
+	while (*s1 == *s2 && *s1 != '\0' && *s2 != '\0')
+	{
+		s1++;
+		s2++;
+	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
+}
+
+
 T_BOOL check_blk_addresses(void *ptr, t_mem_group *tmp_group)
 {
 	char ptr_addr[20];

@@ -65,6 +65,24 @@ void ft_itoa_hex(uint64_t n, int is_upcase, char *buff)
 	print_num(num_digit, nb, buff, is_upcase);
 }
 
+
+static	void		my_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void				ft_putstr(char const *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		my_putchar(s[i]);
+		i++;
+	}
+}
+
 void ft_put_addr(void *addr)
 {
 	char buff[20];

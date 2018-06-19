@@ -2,43 +2,41 @@ ifeq ($(HOSTTYPE),)
 	HOSTTYPE := $(shell uname -m)_$(shell uname -s)
 endif
 
-CC = gcc
-FLAGS = -g -Wall -Wextra -Werror -I includes
-LIBFT = libft/libft.a
 NAME = malloc
-SRC = src/main.c \
+
+CFLAGS = -Wall -Wextra -Werror
+
+SRC = src/check_pointer.c \
+	src/ft_memcpy.c \
+	src/ft_putendl.c \
 	src/ft_malloc.c \
-	src/malloc_find_block.c \
-	src/ft_realloc.c \
 	src/ft_put_addr.c \
+	src/ft_realloc.c \
+	src/main.c \
+	src/malloc_find_block.c \
 	src/show_alloc_mem.c \
-	src/check_pointer.c \
 
-OBJ = $(addsuffix .o, $(basename $(SRC)))
+OBJ = $(SRC:.c=.o)
 
-all: $(LIBFT) $(NAME)
+all : $(NAME)
 
-$(LIBFT):
-	make -C libft
+$(NAME) : $(OBJ)
+	@gcc $(CFLAGS) $(OBJ) -fPIC -shared -o libft_malloc_$(HOSTTYPE).so
+	ln -sf libft_malloc_$(HOSTTYPE).so libft_malloc.so
+	@echo "$(NAME) made"
 
-$(NAME):$(LIBFT) $(NAME) $(OBJ)
-	@echo "building binary file"
-	$(CC) $(FLAGS) $(SRC) -o $(NAME) -I -lft $(LIBFT)
+%.o: %.c
+	gcc $(CFLAGS) -c $< -I./includes -o $@
 
-%.o: %.c ft_ls.h
-		clang $(FLAG) -c $< -o $@
+clean :
+	rm -rf $(OBJ)
+	@echo "OBJ gone"
 
-clean:
-	rm -f $(OBJ)
-	@make clean -C libft/
+fclean : clean
+	rm -rf libft_malloc.so
+	rm -rf libft_malloc_$(HOSTTYPE).so
+	@echo "$(NAME) gone"
 
-fclean: clean
-	@echo "delete $(NAME)"
-	@rm -f $(NAME)
-	@rm -rf ft_sh.dSYM
-	@rm -rf malloc.dSYM
-	@make fclean -C libft/
+re : fclean all
 
-re: fclean all
-
-.PHONY: re clean fclean all
+.PHONY: all clean fclean re

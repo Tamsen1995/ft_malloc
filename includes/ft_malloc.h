@@ -41,6 +41,8 @@ typedef struct s_memory
 
 extern t_memory glob_memory;
 
+void *ft_memcpy(void *dest, const void *src, size_t size);
+void ft_putendl(char const *s);
 void *ft_malloc(size_t size);
 t_mem_group *choose_zone(enum mem_zone zone);
 void *ft_realloc(void *ptr, size_t size);
