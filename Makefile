@@ -12,7 +12,7 @@ SRC = src/check_pointer.c \
 	src/ft_malloc.c \
 	src/ft_put_addr.c \
 	src/ft_realloc.c \
-	src/main.c \
+	src/free.c \
 	src/malloc_find_block.c \
 	src/show_alloc_mem.c \
 

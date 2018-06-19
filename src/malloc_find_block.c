@@ -45,11 +45,16 @@ void defragment(t_block *block_list)
 	tmp_block = block_list;
 	while (tmp_block && tmp_block->next)
 	{
-		if (tmp_block->free == TRUE && tmp_block->next->free == TRUE)
+		ft_putendl("Testing !"); // TESTING
+		ft_putendl("Testing !"); // TESTING
+		if (tmp_block->free == TRUE && tmp_block->next && tmp_block->next->free == TRUE)
 		{
+			ft_putendl("Testing !2"); // TESTING
 			tmp_block->size = tmp_block->size + tmp_block->next->size + sizeof(t_block);
+			ft_putendl("Testing !3"); // TESTING
 			tmp_block->next = tmp_block->next->next;
 		}
+		ft_putendl("Testing !4"); // TESTING
 		tmp_block = tmp_block->next;
 	}
 }

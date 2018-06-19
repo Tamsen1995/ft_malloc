@@ -43,9 +43,9 @@ extern t_memory glob_memory;
 
 void *ft_memcpy(void *dest, const void *src, size_t size);
 void ft_putendl(char const *s);
-void *ft_malloc(size_t size);
+void *malloc(size_t size);
 t_mem_group *choose_zone(enum mem_zone zone);
-void *ft_realloc(void *ptr, size_t size);
+void *realloc(void *ptr, size_t size);
 t_block *find_block(size_t size);
 t_block *split_block(t_block *current, size_t size);
 void extend_heap(t_mem_group *mem_group, size_t size);
