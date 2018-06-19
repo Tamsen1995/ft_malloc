@@ -67,13 +67,11 @@ t_block *split_block(t_block *current, size_t size)
 	new->ptr = (void *)new + sizeof(t_block);
 	new->free = TRUE;
 	new->size = current->size - size - sizeof(t_block);
-
 	current->size = current->size - new->size - sizeof(t_block);
 	current->free = FALSE;
 	if (current->next)
 		new->next = current->next;
 	current->next = new;
-
 	return (current);
 }
 
@@ -96,7 +94,7 @@ t_block *return_block(t_block *tmp_block, size_t size)
 }
 
 /*
-** the size parameter implies the sought 
+** the size parameter implies the sought
 ** after size for the memory allocation
 */
 

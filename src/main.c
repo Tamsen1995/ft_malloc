@@ -24,10 +24,20 @@ void print(char *s)
 int main()
 {
 	char *addr;
+//	char *ptr;
+	int i;
 
-	addr = ft_malloc(16 );
-	ft_free(NULL);
-	ft_free((void *)addr);
-	if (ft_realloc((void *)addr, 10) == NULL)
-		print("Bonjours\n");
+	i = 0;
+	addr = ft_malloc(16);
+//	ft_free(NULL);
+//	ft_free((void *)addr);
+//	if (!(ptr = ft_realloc((void *)addr, 10)))
+//		print("Bonjours\n");
+	while (i < 10)
+	{
+		addr[i] = 'p';
+		i++;
+	}
+	//print(addr); // TESTING
+	
 }

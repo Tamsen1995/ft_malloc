@@ -35,6 +35,8 @@ clean:
 fclean: clean
 	@echo "delete $(NAME)"
 	@rm -f $(NAME)
+	@rm -rf ft_sh.dSYM
+	@rm -rf malloc.dSYM
 	@make fclean -C libft/
 
 re: fclean all
