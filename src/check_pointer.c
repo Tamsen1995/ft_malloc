@@ -1,6 +1,6 @@
 #include "../includes/ft_malloc.h"
 
-int		ft_strcmp(const char *s1, const char *s2)
+int ft_strcmp(const char *s1, const char *s2)
 {
 	while (*s1 == *s2 && *s1 != '\0' && *s2 != '\0')
 	{
@@ -9,7 +9,6 @@ int		ft_strcmp(const char *s1, const char *s2)
 	}
 	return ((unsigned char)*s1 - (unsigned char)*s2);
 }
-
 
 T_BOOL check_blk_addresses(void *ptr, t_mem_group *tmp_group)
 {
@@ -34,6 +33,23 @@ T_BOOL check_blk_addresses(void *ptr, t_mem_group *tmp_group)
 	return (FALSE);
 }
 
+// TODO : put this in a seperate file, maybe in a seperate folder.
+void ft_bzero(void *s, size_t n)
+{
+	unsigned int i;
+	unsigned char *str;
+
+	i = 0;
+	str = s;
+	if (n < 1)
+		return;
+	while (i < n)
+	{
+		str[i] = '\0';
+		i++;
+	}
+}
+
 /*
 ** checks to see whether the given pointer 
 ** is actually in the pre_allocated memory zone or not
@@ -46,6 +62,9 @@ T_BOOL check_pointer(void *ptr)
 	t_block *tmp_block;
 	t_mem_group *tmp_group;
 
+	ft_bzero(ptr_addr, 20);
+	ft_bzero(blk_ptr_addr, 20);
+	ft_itoa_hex((uint64_t)ptr, 1, ptr_addr);
 	if (!ptr)
 		return (FALSE);
 	tmp_group = choose_zone(Small);

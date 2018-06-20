@@ -10,11 +10,9 @@ void free(void *ptr)
 	t_block *tmp_block;
 
 	tmp_block = NULL;
-	if (!ptr)
-	{
+	if (!ptr || !check_pointer(ptr))
 		return;
-	}
 	tmp_block = ptr - sizeof(t_block);
 	tmp_block->free = TRUE;
-//	defragment(tmp_block);
+	defragment(tmp_block);
 }

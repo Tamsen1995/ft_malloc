@@ -7,8 +7,11 @@ void *realloc(void *ptr, size_t size)
 
 	new_block = NULL;
 	old_block = NULL;
+	ft_putendl("Testing 2"); // TESTING
 	if (!check_pointer(ptr))
+	{
 		return (NULL);
+	}
 	old_block = (void *)ptr - sizeof(t_block);
 	new_block = find_block(size);
 	if (size < old_block->size)
