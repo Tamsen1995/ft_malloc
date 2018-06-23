@@ -38,27 +38,6 @@ t_block *large_size(size_t size)
 	}
 }
 
-void defragment(t_block *block_list)
-{
-	t_block *tmp_block;
-
-	tmp_block = block_list;
-	while (tmp_block && tmp_block->next)
-	{
-		ft_putendl("Testing !"); // TESTING
-		ft_putendl("Testing !"); // TESTING
-		if (tmp_block->free == TRUE && tmp_block->next && tmp_block->next->free == TRUE)
-		{
-			ft_putendl("Testing !2"); // TESTING
-			tmp_block->size = tmp_block->size + tmp_block->next->size + sizeof(t_block);
-			ft_putendl("Testing !3"); // TESTING
-			tmp_block->next = tmp_block->next->next;
-		}
-		ft_putendl("Testing !4"); // TESTING
-		tmp_block = tmp_block->next;
-	}
-}
-
 /*
 ** splits a block to make a new one
 ** then points the old one to new block and returns the old one
@@ -71,6 +50,7 @@ t_block *split_block(t_block *current, size_t size)
 	new = (void *)current->ptr + size;
 	new->ptr = (void *)new + sizeof(t_block);
 	new->free = TRUE;
+	new->next = NULL;
 	new->size = current->size - size - sizeof(t_block);
 	current->size = current->size - new->size - sizeof(t_block);
 	current->free = FALSE;

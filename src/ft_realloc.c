@@ -1,6 +1,6 @@
 #include "../includes/ft_malloc.h"
 
-void *realloc(void *ptr, size_t size)
+void *ft_realloc(void *ptr, size_t size)
 {
 	t_block *old_block;
 	t_block *new_block;
@@ -8,7 +8,9 @@ void *realloc(void *ptr, size_t size)
 	new_block = NULL;
 	old_block = NULL;
 	if (!check_pointer(ptr))
+	{
 		return (NULL);
+	}
 	old_block = (void *)ptr - sizeof(t_block);
 	new_block = find_block(size);
 	if (size < old_block->size)

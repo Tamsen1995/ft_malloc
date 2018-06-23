@@ -39,7 +39,7 @@ void extend_heap(t_mem_group *mem_group, size_t size)
 		new_mem_group(mem_group, sz * 128);
 }
 
-void *malloc(size_t size)
+void *ft_malloc(size_t size)
 {
 	t_block *ret;
 	int sz;

@@ -1,6 +1,6 @@
 #include "../includes/ft_malloc.h"
 
-int		ft_strcmp(const char *s1, const char *s2)
+int ft_strcmp(const char *s1, const char *s2)
 {
 	while (*s1 == *s2 && *s1 != '\0' && *s2 != '\0')
 	{
@@ -9,7 +9,6 @@ int		ft_strcmp(const char *s1, const char *s2)
 	}
 	return ((unsigned char)*s1 - (unsigned char)*s2);
 }
-
 
 T_BOOL check_blk_addresses(void *ptr, t_mem_group *tmp_group)
 {
@@ -24,7 +23,7 @@ T_BOOL check_blk_addresses(void *ptr, t_mem_group *tmp_group)
 		tmp_block = tmp_group->mem;
 		while (tmp_block)
 		{
-			ft_itoa_hex((uint64_t)tmp_block->ptr, 1, blk_ptr_addr);
+			ft_itoa_hex((uint64_t)tmp_block->ptr, 1, blk_ptr_addr);		
 			if (ft_strcmp(ptr_addr, blk_ptr_addr) == 0)
 				return (TRUE);
 			tmp_block = tmp_block->next;
@@ -58,6 +57,7 @@ T_BOOL check_pointer(void *ptr)
 	while (tmp_block)
 	{
 		ft_itoa_hex((uint64_t)tmp_block->ptr, 1, blk_ptr_addr);
+
 		if (ft_strcmp(ptr_addr, blk_ptr_addr) == 0)
 			return (TRUE);
 		tmp_block = tmp_block->next;
