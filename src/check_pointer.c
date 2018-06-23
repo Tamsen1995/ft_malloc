@@ -54,15 +54,10 @@ T_BOOL check_pointer(void *ptr)
 	if (check_blk_addresses(ptr, tmp_group) == TRUE)
 		return (TRUE);
 	tmp_block = glob_memory.large;
+	ft_itoa_hex((uint64_t)ptr, 1, ptr_addr);
 	while (tmp_block)
 	{
 		ft_itoa_hex((uint64_t)tmp_block->ptr, 1, blk_ptr_addr);
-	
-		print(ptr_addr);	 // TESTING
-		print(" <-This is during check\n");		 // TESTING
-		print(blk_ptr_addr); // TESTING
-		print(" <-A block\n");		 // TESTING
-	
 		if (ft_strcmp(ptr_addr, blk_ptr_addr) == 0)
 			return (TRUE);
 		tmp_block = tmp_block->next;
