@@ -15,18 +15,11 @@
 
 t_mem_group *choose_zone(enum mem_zone zone)
 {
-	t_mem_group *tmp_group;
-
-	tmp_group = NULL;
 	if (zone == Small)
-	{
-		tmp_group = glob_memory.sml;
-	}
+		return (glob_memory.sml);
 	else if (zone == Medium)
-	{
-		tmp_group = glob_memory.med;
-	}
-	return (tmp_group);
+		return (glob_memory.med);
+	return (NULL);
 }
 
 void show_alloc_zone(enum mem_zone zone)
@@ -59,9 +52,14 @@ void show_alloc_mem()
 {
 	t_block *tmp_block;
 
+	ft_putstr("\nTINY : ");
+
 	show_alloc_zone(Small);
+	ft_putstr("\nSMALL : ");
+
 	show_alloc_zone(Medium);
 	ft_putstr("\nLARGE : ");
+	
 	tmp_block = glob_memory.large;
 	while (tmp_block)
 	{

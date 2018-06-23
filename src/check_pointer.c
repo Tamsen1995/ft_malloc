@@ -23,7 +23,7 @@ T_BOOL check_blk_addresses(void *ptr, t_mem_group *tmp_group)
 		tmp_block = tmp_group->mem;
 		while (tmp_block)
 		{
-			ft_itoa_hex((uint64_t)tmp_block->ptr, 1, blk_ptr_addr);		
+			ft_itoa_hex((uint64_t)tmp_block->ptr, 1, blk_ptr_addr);
 			if (ft_strcmp(ptr_addr, blk_ptr_addr) == 0)
 				return (TRUE);
 			tmp_block = tmp_block->next;
@@ -54,10 +54,10 @@ T_BOOL check_pointer(void *ptr)
 	if (check_blk_addresses(ptr, tmp_group) == TRUE)
 		return (TRUE);
 	tmp_block = glob_memory.large;
+	ft_itoa_hex((uint64_t)ptr, 1, ptr_addr);
 	while (tmp_block)
 	{
 		ft_itoa_hex((uint64_t)tmp_block->ptr, 1, blk_ptr_addr);
-
 		if (ft_strcmp(ptr_addr, blk_ptr_addr) == 0)
 			return (TRUE);
 		tmp_block = tmp_block->next;

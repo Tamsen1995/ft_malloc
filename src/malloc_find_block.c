@@ -24,6 +24,7 @@ t_block *large_size(size_t size)
 	new_block->ptr = (void *)new_block + sizeof(t_block);
 	new_block->free = FALSE;
 	new_block->size = size;
+	new_block->next = NULL;
 	if (!glob_memory.large)
 	{
 		glob_memory.large = new_block;
@@ -92,7 +93,9 @@ t_block *find_block(size_t size)
 	if (size <= SML || size <= MED)
 		tmp_group = choose_mem_group(size);
 	else
+	{
 		return (large_size(size));
+	}
 	while (tmp_group)
 	{
 		tmp_block = tmp_group->mem;

@@ -5,7 +5,7 @@ void print(char *s)
 	write(1, s, strlen(s));
 }
 
-void free(void *ptr)
+void ft_free(void *ptr)
 {
 	t_block *tmp_block;
 
@@ -16,5 +16,5 @@ void free(void *ptr)
 	}
 	tmp_block = ptr - sizeof(t_block);
 	tmp_block->free = TRUE;
-//	defragment(tmp_block);
+	defragment(tmp_block);
 }

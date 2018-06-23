@@ -39,6 +39,7 @@ typedef struct s_memory
 	t_block *large;
 } t_memory;
 
+void ft_free(void *ptr);
 extern t_memory glob_memory;
 void print(char *s);
 void *ft_memcpy(void *dest, const void *src, size_t size);
