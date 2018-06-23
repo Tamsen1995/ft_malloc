@@ -26,6 +26,7 @@ SRC_bin = src/check_pointer.c \
 	src/ft_realloc.c \
 	src/free.c \
 	src/main.c \
+	src/print.c \
 	src/malloc_find_block.c \
 	src/show_alloc_mem.c \
 

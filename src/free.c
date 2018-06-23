@@ -1,16 +1,11 @@
 #include "../includes/ft_malloc.h"
 
-void print(char *s)
-{
-	write(1, s, strlen(s));
-}
-
-void ft_free(void *ptr)
+void free(void *ptr)
 {
 	t_block *tmp_block;
 
 	tmp_block = NULL;
-	if (!ptr)
+	if (!check_pointer(ptr))
 	{
 		return;
 	}

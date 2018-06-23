@@ -1,8 +1,8 @@
+#define M (1024 * 1024)
+
 
 void print(char *s)
 {
-	if (!s)
-		return;
 	write(1, s, strlen(s));
 }
 
