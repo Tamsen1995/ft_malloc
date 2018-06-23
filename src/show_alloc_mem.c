@@ -15,18 +15,11 @@
 
 t_mem_group *choose_zone(enum mem_zone zone)
 {
-	t_mem_group *tmp_group;
-
-	tmp_group = NULL;
 	if (zone == Small)
-	{
-		tmp_group = glob_memory.sml;
-	}
+		return (glob_memory.sml);
 	else if (zone == Medium)
-	{
-		tmp_group = glob_memory.med;
-	}
-	return (tmp_group);
+		return (glob_memory.med);
+	return (NULL);
 }
 
 void show_alloc_zone(enum mem_zone zone)
