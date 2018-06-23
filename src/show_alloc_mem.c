@@ -52,9 +52,14 @@ void show_alloc_mem()
 {
 	t_block *tmp_block;
 
+	ft_putstr("\nTINY : ");
+
 	show_alloc_zone(Small);
+	ft_putstr("\nSMALL : ");
+
 	show_alloc_zone(Medium);
 	ft_putstr("\nLARGE : ");
+	
 	tmp_block = glob_memory.large;
 	while (tmp_block)
 	{

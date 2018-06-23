@@ -28,11 +28,6 @@ t_block *large_size(size_t size)
 	if (!glob_memory.large)
 	{
 		glob_memory.large = new_block;
-
-		char ptr_addr[20];
-		ft_itoa_hex((uint64_t)new_block->ptr, 1, ptr_addr);
-		print(ptr_addr); // TESTING
-		print(" <-This is during alloc\n");	 // TESTING
 		return (new_block);
 	}
 	else
