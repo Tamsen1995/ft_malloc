@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   malloc_find_block.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/25 18:42:04 by tbui              #+#    #+#             */
+/*   Updated: 2018/06/25 18:42:05 by tbui             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_malloc.h"
 
 /*
@@ -5,7 +17,7 @@
 ** for the sought after allocation size.
 */
 
-t_mem_group *choose_mem_group(size_t size)
+t_mem_group		*choose_mem_group(size_t size)
 {
 	if (size <= SML)
 		return (glob_memory.sml);
@@ -14,7 +26,7 @@ t_mem_group *choose_mem_group(size_t size)
 	return (NULL);
 }
 
-t_block *large_size(size_t size)
+t_block			*large_size(size_t size)
 {
 	t_block *new_block;
 	t_block *tmp_block;
@@ -44,7 +56,7 @@ t_block *large_size(size_t size)
 ** then points the old one to new block and returns the old one
 */
 
-t_block *split_block(t_block *current, size_t size)
+t_block			*split_block(t_block *current, size_t size)
 {
 	t_block *new;
 
@@ -67,7 +79,7 @@ t_block *split_block(t_block *current, size_t size)
 ** and then returns.
 */
 
-t_block *return_block(t_block *tmp_block, size_t size)
+t_block			*return_block(t_block *tmp_block, size_t size)
 {
 	if (tmp_block->size > size + sizeof(t_block))
 		return (split_block(tmp_block, size));
@@ -84,26 +96,25 @@ t_block *return_block(t_block *tmp_block, size_t size)
 ** after size for the memory allocation
 */
 
-t_block *find_block(size_t size)
+t_block			*find_block(size_t size)
 {
-	t_block *tmp_block;
-	t_mem_group *tmp_group;
+	t_block			*tmp_block;
+	t_mem_group		*tmp_group;
 
 	tmp_group = NULL;
 	if (size <= SML || size <= MED)
 		tmp_group = choose_mem_group(size);
 	else
-	{
 		return (large_size(size));
-	}
 	while (tmp_group)
 	{
 		tmp_block = tmp_group->mem;
 		defragment(tmp_block);
-		while (tmp_block && (tmp_block->size < size + sizeof(t_block) || tmp_block->free == FALSE))
+		while (tmp_block && (tmp_block->size < size + sizeof(t_block) \
+		|| tmp_block->free == FALSE))
 			tmp_block = tmp_block->next;
-
-		if (((tmp_block && tmp_block->size > size + sizeof(t_block)) || tmp_block->size == size) && tmp_block->free)
+		if (((tmp_block && tmp_block->size > size + sizeof(t_block)) \
+		|| tmp_block->size == size) && tmp_block->free)
 		{
 			return (return_block(tmp_block, size));
 		}
