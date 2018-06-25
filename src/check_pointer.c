@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_pointer.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/25 17:55:11 by tbui              #+#    #+#             */
+/*   Updated: 2018/06/25 17:55:13 by tbui             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_malloc.h"
 
-int ft_strcmp(const char *s1, const char *s2)
+int			ft_strcmp(const char *s1, const char *s2)
 {
 	while (*s1 == *s2 && *s1 != '\0' && *s2 != '\0')
 	{
@@ -10,11 +22,11 @@ int ft_strcmp(const char *s1, const char *s2)
 	return ((unsigned char)*s1 - (unsigned char)*s2);
 }
 
-T_BOOL check_blk_addresses(void *ptr, t_mem_group *tmp_group)
+T_BOOL		check_blk_addresses(void *ptr, t_mem_group *tmp_group)
 {
-	char ptr_addr[20];
-	char blk_ptr_addr[20];
-	t_block *tmp_block;
+	char	ptr_addr[20];
+	char	blk_ptr_addr[20];
+	t_block	*tmp_block;
 
 	tmp_block = NULL;
 	ft_itoa_hex((uint64_t)ptr, 1, ptr_addr);
@@ -34,16 +46,16 @@ T_BOOL check_blk_addresses(void *ptr, t_mem_group *tmp_group)
 }
 
 /*
-** checks to see whether the given pointer 
+** checks to see whether the given pointer
 ** is actually in the pre_allocated memory zone or not
 */
 
-T_BOOL check_pointer(void *ptr)
+T_BOOL		check_pointer(void *ptr)
 {
-	char ptr_addr[20];
-	char blk_ptr_addr[20];
-	t_block *tmp_block;
-	t_mem_group *tmp_group;
+	char		ptr_addr[20];
+	char		blk_ptr_addr[20];
+	t_block		*tmp_block;
+	t_mem_group	*tmp_group;
 
 	if (!ptr)
 		return (FALSE);
