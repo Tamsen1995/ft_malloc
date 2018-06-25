@@ -1,0 +1,1 @@
+./run.sh ./test0 && ./run.sh ./test1 && ./run.sh ./test2 && ./run.sh ./test3 && ./run.sh ./test4
