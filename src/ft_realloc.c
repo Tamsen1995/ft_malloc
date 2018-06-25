@@ -7,9 +7,9 @@ void *realloc(void *ptr, size_t size)
 
 	new_block = NULL;
 	old_block = NULL;
-	if (!check_pointer(ptr))
+	if (!ptr)
 	{
-		return (NULL);
+		return (malloc(size));
 	}
 	old_block = (void *)ptr - sizeof(t_block);
 	new_block = find_block(size);
