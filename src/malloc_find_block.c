@@ -102,7 +102,8 @@ t_block *find_block(size_t size)
 		defragment(tmp_block);
 		while (tmp_block && (tmp_block->size < size + sizeof(t_block) || tmp_block->free == FALSE))
 			tmp_block = tmp_block->next;
-		if (tmp_block->size > size + sizeof(t_block) || tmp_block->size == size)
+
+		if (((tmp_block && tmp_block->size > size + sizeof(t_block)) || tmp_block->size == size) && tmp_block->free)
 		{
 			return (return_block(tmp_block, size));
 		}

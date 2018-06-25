@@ -8,17 +8,20 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRC = src/check_pointer.c \
 	src/ft_memcpy.c \
+	src/ft_putnbr.c \
 	src/defragment.c \
 	src/ft_putendl.c \
 	src/ft_malloc.c \
 	src/ft_put_addr.c \
-	src/ft_realloc.c \
 	src/free.c \
 	src/malloc_find_block.c \
 	src/show_alloc_mem.c \
+	src/ft_realloc.c \
+
 
 SRC_bin = src/check_pointer.c \
 	src/ft_memcpy.c \
+	src/ft_putnbr.c \
 	src/defragment.c \
 	src/ft_putendl.c \
 	src/ft_malloc.c \
@@ -26,6 +29,7 @@ SRC_bin = src/check_pointer.c \
 	src/ft_realloc.c \
 	src/free.c \
 	src/main.c \
+	src/print.c \
 	src/malloc_find_block.c \
 	src/show_alloc_mem.c \
 

@@ -27,7 +27,6 @@ t_mem_group *new_mem_group(t_mem_group *current, size_t size)
 	return (mem_group);
 }
 
-
 void extend_heap(t_mem_group *mem_group, size_t size)
 {
 	size_t sz;
@@ -39,12 +38,13 @@ void extend_heap(t_mem_group *mem_group, size_t size)
 		new_mem_group(mem_group, sz * 128);
 }
 
-void *ft_malloc(size_t size)
+void *malloc(size_t size)
 {
 	t_block *ret;
 	int sz;
 
 	sz = 0;
+
 	if (!glob_memory.init)
 	{
 		sz = getpagesize() * 13;
@@ -54,8 +54,12 @@ void *ft_malloc(size_t size)
 		glob_memory.init = TRUE;
 	}
 	ret = find_block(size);
-	if (ret)
-		return (ret->ptr);
+	if (ret && ret->ptr)
+	{
+		return ((void *)ret->ptr);
+	}
 	else
+	{
 		return (NULL);
+	}
 }
