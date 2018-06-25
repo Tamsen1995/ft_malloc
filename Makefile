@@ -8,6 +8,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRC = src/check_pointer.c \
 	src/ft_memcpy.c \
+	src/ft_putstr.c \
 	src/ft_putnbr.c \
 	src/defragment.c \
 	src/ft_putendl.c \
@@ -21,6 +22,7 @@ SRC = src/check_pointer.c \
 
 SRC_bin = src/check_pointer.c \
 	src/ft_memcpy.c \
+	src/ft_putstr.c \
 	src/ft_putnbr.c \
 	src/defragment.c \
 	src/ft_putendl.c \
