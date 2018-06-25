@@ -42,7 +42,7 @@ typedef struct s_memory
 void free(void *ptr);
 void *malloc(size_t size);
 void *realloc(void *ptr, size_t size);
-
+void ft_putstr(char const *s);
 void ft_putnbr(int n);
 void print(char *s);
 extern t_memory glob_memory;

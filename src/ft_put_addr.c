@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_put_addr.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/25 18:22:57 by tbui              #+#    #+#             */
+/*   Updated: 2018/06/25 18:23:00 by tbui             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_malloc.h"
 
-static uint64_t pow_16(size_t pw)
+static uint64_t		pow_16(size_t pw)
 {
-	uint64_t to_return;
-	size_t i;
+	uint64_t		to_return;
+	size_t			i;
 
 	i = 0;
 	to_return = 1;
@@ -15,7 +27,7 @@ static uint64_t pow_16(size_t pw)
 	return (to_return);
 }
 
-static char get_char(unsigned char digit, int is_upcase)
+static char			get_char(unsigned char digit, int is_upcase)
 {
 	if (digit <= 9)
 		return (digit + '0');
@@ -26,14 +38,14 @@ static char get_char(unsigned char digit, int is_upcase)
 		return (digit + 'a');
 }
 
-static void print_num(size_t num_digit,
-					  uint64_t n,
-					  char *to_return,
-					  int is_upcase)
+static void			print_num(size_t num_digit,
+uint64_t n,
+char *to_return,
+int is_upcase)
 {
-	size_t i;
-	size_t istr;
-	unsigned char digit;
+	size_t			i;
+	size_t			istr;
+	unsigned char	digit;
 
 	i = num_digit;
 	istr = 0;
@@ -48,10 +60,10 @@ static void print_num(size_t num_digit,
 	to_return[num_digit] = '\0';
 }
 
-void ft_itoa_hex(uint64_t n, int is_upcase, char *buff)
+void				ft_itoa_hex(uint64_t n, int is_upcase, char *buff)
 {
-	size_t num_digit;
-	uint64_t nb;
+	size_t		num_digit;
+	uint64_t	nb;
 
 	num_digit = 1;
 	nb = n;
@@ -65,25 +77,7 @@ void ft_itoa_hex(uint64_t n, int is_upcase, char *buff)
 	print_num(num_digit, nb, buff, is_upcase);
 }
 
-
-static	void		my_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void				ft_putstr(char const *s)
-{
-	int i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		my_putchar(s[i]);
-		i++;
-	}
-}
-
-void ft_put_addr(void *addr)
+void				ft_put_addr(void *addr)
 {
 	char buff[20];
 

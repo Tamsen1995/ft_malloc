@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/25 18:34:37 by tbui              #+#    #+#             */
-/*   Updated: 2018/06/25 18:34:39 by tbui             ###   ########.fr       */
+/*   Created: 2018/06/25 18:27:06 by tbui              #+#    #+#             */
+/*   Updated: 2018/06/25 18:27:10 by tbui             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_malloc.h"
 
-void		print(char *s)
+static void			my_putchar(char c)
 {
-	write(1, s, strlen(s));
+	write(1, &c, 1);
+}
+
+void				ft_putstr(char const *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		my_putchar(s[i]);
+		i++;
+	}
 }

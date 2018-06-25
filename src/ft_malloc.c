@@ -1,22 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_malloc.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/25 18:01:57 by tbui              #+#    #+#             */
+/*   Updated: 2018/06/25 18:02:01 by tbui             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_malloc.h"
 
-t_memory glob_memory = {0, 0, 0, 0};
+t_memory		glob_memory = {0, 0, 0, 0};
 
 /*
 ** Finds a block of the size indicated by the user
 ** If this can't be done then the heap / linked list is to be extended
 */
 
-t_mem_group *new_mem_group(t_mem_group *current, size_t size)
+t_mem_group		*new_mem_group(t_mem_group *current, size_t size)
 {
-	t_mem_group *mem_group;
-	t_block *tmp_block;
+	t_mem_group		*mem_group;
+	t_block			*tmp_block;
 
 	mem_group = mmap(NULL, size, PROT, ANON, -1, 0);
 	mem_group->size = size - sizeof(t_mem_group);
 	mem_group->mem = (void *)mem_group + sizeof(t_mem_group);
 	mem_group->next = NULL;
-	// point a block towards the memory of a mem group
 	tmp_block = mem_group->mem;
 	tmp_block->ptr = (void *)tmp_block + sizeof(t_block);
 	tmp_block->free = TRUE;
@@ -27,7 +38,7 @@ t_mem_group *new_mem_group(t_mem_group *current, size_t size)
 	return (mem_group);
 }
 
-void extend_heap(t_mem_group *mem_group, size_t size)
+void			extend_heap(t_mem_group *mem_group, size_t size)
 {
 	size_t sz;
 
@@ -38,13 +49,12 @@ void extend_heap(t_mem_group *mem_group, size_t size)
 		new_mem_group(mem_group, sz * 128);
 }
 
-void *malloc(size_t size)
+void			*malloc(size_t size)
 {
-	t_block *ret;
-	int sz;
+	t_block		*ret;
+	int			sz;
 
 	sz = 0;
-
 	if (!glob_memory.init)
 	{
 		sz = getpagesize() * 13;
