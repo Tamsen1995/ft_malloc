@@ -1,12 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbui <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/25 18:37:04 by tbui              #+#    #+#             */
+/*   Updated: 2018/06/25 18:37:06 by tbui             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_malloc.h"
 #define M (1024 * 1024)
 
-
-int main()
+int		main(void)
 {
-	char *addr1;
-	char *addr2;
-	char *addr3;
+	char		*addr1;
+	char		*addr2;
+	char		*addr3;
 
 	addr1 = (char *)malloc(16 * M);
 	strcpy(addr1, "Bonjours\n");
