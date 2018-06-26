@@ -49,7 +49,8 @@ void show_alloc_zone(enum mem_zone zone)
 			ft_putstr(" - ");
 			ft_put_addr((void *)tmp_block->next);
 			ft_putstr(" : ");
-			printf("%lu bytes\n", tmp_block->size); // Refactor
+			ft_putnbr((int)tmp_block->size);
+			ft_putendl(" bytes\n");
 			if (tmp_block->free == TRUE)
 				ft_putendl("block status: FREE\n");
 			else
@@ -65,19 +66,19 @@ void show_alloc_mem()
 	t_block *tmp_block;
 
 	ft_putstr("\nTINY : ");
-
 	show_alloc_zone(Small);
 	ft_putstr("\nSMALL : ");
-
 	show_alloc_zone(Medium);
 	ft_putstr("\nLARGE : ");
-	
 	tmp_block = glob_memory.large;
 	while (tmp_block)
 	{
-		printf("%p - ", tmp_block->ptr);
-		printf("%p : ", tmp_block->next);
-		printf("%lu bytes\n", tmp_block->size);
+		ft_put_addr(tmp_block->ptr);
+		ft_putstr(" - ");
+		ft_put_addr(tmp_block->next);
+		ft_putstr(" : ");
+		ft_putnbr((int)tmp_block->size);
+		ft_putendl(" bytes\n");
 		if (tmp_block->free == TRUE)
 			ft_putendl("block status: FREE\n");
 		else
